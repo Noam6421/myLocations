@@ -1,10 +1,18 @@
 import React from 'react';
+import { config } from 'dotenv';
 
-function App() {
-  return (
-    <div>
-    </div>
-  );
+import Content from './Content/Content';
+import AppToolbar from './AppToolBar/AppToolbar';
+
+config();
+
+const App: React.FC = (): JSX.Element => {
+    return (
+        <>
+            <AppToolbar />
+            <Content/>
+        </>
+    );
 }
 
 export default App;
