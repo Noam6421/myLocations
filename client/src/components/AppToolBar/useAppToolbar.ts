@@ -1,13 +1,13 @@
 import React from 'react';
 
-const useAppToolbar = () :  useTopToolbarOutcome => {
+const useAppToolbar = () :  useAppToolbarOutcome => {
     
     return {
         
     }
 };
 
-export interface useTopToolbarOutcome  {
+export interface useAppToolbarOutcome {
     
 };
 
