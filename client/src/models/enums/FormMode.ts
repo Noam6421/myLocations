@@ -1,6 +1,6 @@
 enum FormMode {
+    VIEW,
     CREATE,
-    READ,
     EDIT
 };
 
