@@ -11,7 +11,7 @@ const useApp = () :  useAppOutcome => {
 
     useEffect(() => {
         const localStorageCategories = localStorage.getItem("categories");
-        setCategories([{name: 'a'}]);
+        setCategories([{name: 'a'}, {name: 'b'}, {name: 'c'}, {name: 'd'}, {name: 'e'}, {name: 'f'}, {name: 'g'}, {name: 'h'}]);
     }, [])
     
     return {
