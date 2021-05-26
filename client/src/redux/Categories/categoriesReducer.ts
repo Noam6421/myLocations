@@ -13,6 +13,18 @@ const categoriesReducer = (state = initialState, action: Actions.CategoriesActio
                 ...state,
                 action.payload.category
             ];
+        case Actions.EDIT_CATEGORY: 
+            return state.map((category) => {
+                if (category.name === action.payload.category.name) {
+                    return {
+                        name: action.payload.newName
+                    }
+                } else {
+                return category
+                }
+            });
+        case Actions.DELETE_CATEGORY: 
+            return state.filter(({ name }) => name !== action.payload.category.name);
         default: 
             return state;
     };
