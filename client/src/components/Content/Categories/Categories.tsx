@@ -4,18 +4,17 @@ import { Grid, Typography, Card } from '@material-ui/core';
 
 import Category from 'models/Category';
 import StoreStateType from 'redux/storeStateType';
+import { setSelectedCategory } from 'redux/SelectedCategory/selectedCategoryActionCreators';
 
 import useStyles from './CategoriesStyles';
-import { Link } from 'react-router-dom';
-import { indexRoute } from 'Utils/Routes/Routes';
 
 const Categories: React.FC<Props> = (): JSX.Element => {
     
     const classes = useStyles();
 
-    const categories = useSelector<StoreStateType, Category[]>(state => state.categories)
+    const categories = useSelector<StoreStateType, Category[]>(state => state.categories);
+    const selectedCategory = useSelector<StoreStateType, string>(state => state.selectedCategory);
 
-    console.log(categories);
     return (
         <>
             <Grid 
@@ -33,9 +32,16 @@ const Categories: React.FC<Props> = (): JSX.Element => {
                     categories.map((category) => {
                         return (
                             <Grid item xs={3} key={category.name}>
-                                <Link to={indexRoute} className={classes.categoryLink}>
-                                    <Card className={classes.categoryCard}>{category.name}</Card>
-                                </Link>
+                                <Card 
+                                    onClick={() => setSelectedCategory(selectedCategory === category.name ? '' : category.name)} 
+                                    className={
+                                        category.name === selectedCategory
+                                        ? classes.categoryCardSelected
+                                        : classes.categoryCard
+                                    }
+                                >
+                                    {category.name}
+                                </Card>
                             </Grid>
                         )
                     })
