@@ -8,6 +8,11 @@ const categoriesReducer = (state = initialState, action: Actions.CategoriesActio
     switch (action.type) {
         case Actions.SET_CATEGORIES: 
             return action.payload.categories;
+        case Actions.CREATE_CATEGORY: 
+            return [
+                ...state,
+                action.payload.category
+            ];
         default: 
             return state;
     };

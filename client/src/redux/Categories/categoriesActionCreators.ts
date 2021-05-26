@@ -9,3 +9,10 @@ export const setCategories = (categories: Category[]): void => {
         payload: { categories }
     })
 };
+
+export const createCategory = (category: Category): void => {
+    store.dispatch({
+        type: actionTypes.CREATE_CATEGORY,
+        payload: { category }
+    })
+};
