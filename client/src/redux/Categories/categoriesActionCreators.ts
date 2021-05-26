@@ -16,3 +16,17 @@ export const createCategory = (category: Category): void => {
         payload: { category }
     })
 };
+
+export const editCategory = (category: Category, newName: string): void => {
+    store.dispatch({
+        type: actionTypes.EDIT_CATEGORY,
+        payload: { category, newName }
+    })
+};
+
+export const deleteCategory = (category: Category): void => {
+    store.dispatch({
+        type: actionTypes.DELETE_CATEGORY,
+        payload: { category }
+    })
+};
