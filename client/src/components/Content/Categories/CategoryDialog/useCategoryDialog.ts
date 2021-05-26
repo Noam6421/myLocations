@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import { createCategory } from 'redux/Categories/categoriesActionCreators';
+import StoreStateType from 'redux/storeStateType';
+import { createCategory, editCategory } from 'redux/Categories/categoriesActionCreators';
+import { setSelectedCategory } from 'redux/SelectedCategory/selectedCategoryActionCreators';
 
 const useCategoryDialog = (props: Props) :  useAppToolbarOutcome => {
-
+    
     const { handleCloseCategoryDialog } = props;
+    
+    const selectedCategory = useSelector<StoreStateType, string>(state => state.selectedCategory);
+
     const [categoryName, setCategoryName] = useState<string>('');
 
     const handleAddCategory = () => {
         createCategory({name: categoryName});
         handleCloseCategoryDialog();
+        setCategoryName('');
     };
 
     const handleEditCategory = () => {
-        console.log('edit cat');
+        editCategory({name: selectedCategory}, categoryName);
+        handleCloseCategoryDialog();
+        setSelectedCategory(categoryName);
+        setCategoryName('');
     };
 
     return {
@@ -21,7 +31,7 @@ const useCategoryDialog = (props: Props) :  useAppToolbarOutcome => {
         setCategoryName,
         handleAddCategory,
         handleEditCategory
-    }
+    };
 };
 
 export interface useAppToolbarOutcome {

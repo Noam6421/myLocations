@@ -1,60 +1,68 @@
 import React, { useState } from 'react';
-import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { TextField, Typography, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@material-ui/core';
 
 import FormMode from 'models/enums/FormMode';
+import StoreStateType from 'redux/storeStateType';
 
 import useCategoryDialog from './useCategoryDialog';
 
-const CREATE_CATEGORY_TITLE = 'Add New Category';
-const EDIT_CATEGORY_TITLE = 'Edit Category';
+const VIEW_CATEGORY_TITLE = 'Category:';
+const CREATE_CATEGORY_TITLE = 'Add Category:';
+const EDIT_CATEGORY_TITLE = 'Edit Category:';
 
 const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
 
-    const {
-        open,
-        mode,
-        handleOpenCategoryDialog,
-        handleCloseCategoryDialog
-    } = props;
+    const { open, mode, handleCloseCategoryDialog } = props;
+    
+    const selectedCategory = useSelector<StoreStateType, string>(state => state.selectedCategory);
 
     const {
-        categoryName,
-        setCategoryName,
-        handleAddCategory,
-        handleEditCategory
+        categoryName, setCategoryName,
+        handleAddCategory, handleEditCategory
     } = useCategoryDialog({ handleCloseCategoryDialog });
 
+    const viewMode = mode === FormMode.VIEW;
     const editMode = mode === FormMode.EDIT;
 
     return (
         <>
             <Dialog open={open} onClose={handleCloseCategoryDialog}>
                 <DialogTitle>
-                    { editMode 
-                        ? EDIT_CATEGORY_TITLE
-                        : CREATE_CATEGORY_TITLE
+                    { viewMode 
+                        ? VIEW_CATEGORY_TITLE 
+                        : editMode
+                            ? EDIT_CATEGORY_TITLE
+                            : CREATE_CATEGORY_TITLE
                     }
                 </DialogTitle>
                 <DialogContent>
-                    <TextField
-                        value={categoryName}
-                        onChange={(event) => setCategoryName(event.target.value)}
-                        autoFocus
-                        margin='dense'
-                        fullWidth
-                        placeholder={editMode ? 'todo' : 'New category name' }
-                    />
+                    { viewMode ? 
+                        <Typography>Name: {selectedCategory}</Typography>
+                        :
+                        <TextField
+                            value={categoryName === '' ? selectedCategory : categoryName}
+                            onChange={(event) => setCategoryName(event.target.value)}
+                            autoFocus
+                            margin='dense'
+                            fullWidth
+                            placeholder={editMode ? 'todo' : 'New category name' }
+                        />
+                    }
+                   
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseCategoryDialog} color='primary'>
                         Cancel
                     </Button>
-                    <Button 
-                        onClick={editMode ? handleEditCategory : handleAddCategory} 
-                        color='primary'
-                    >
-                        { editMode ? 'Save' : 'Add' }
-                    </Button>
+                    {!viewMode &&
+                        <Button 
+                            onClick={editMode ? handleEditCategory : handleAddCategory} 
+                            color='primary'
+                        >
+                            { editMode ? 'Save' : 'Add' }
+                        </Button>
+                    }
                 </DialogActions>
             </Dialog>
         </>
@@ -64,7 +72,6 @@ const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
 interface Props {
     open: boolean;
     mode: FormMode;
-    handleOpenCategoryDialog: () => void;
     handleCloseCategoryDialog: () => void;
 };
 
