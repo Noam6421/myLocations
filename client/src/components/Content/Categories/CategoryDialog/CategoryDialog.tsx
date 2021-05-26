@@ -3,6 +3,8 @@ import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, Button } 
 
 import FormMode from 'models/enums/FormMode';
 
+import useCategoryDialog from './useCategoryDialog';
+
 const CREATE_CATEGORY_TITLE = 'Add New Category';
 const EDIT_CATEGORY_TITLE = 'Edit Category';
 
@@ -14,6 +16,13 @@ const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
         handleOpenCategoryDialog,
         handleCloseCategoryDialog
     } = props;
+
+    const {
+        categoryName,
+        setCategoryName,
+        handleAddCategory,
+        handleEditCategory
+    } = useCategoryDialog({ handleCloseCategoryDialog });
 
     const editMode = mode === FormMode.EDIT;
 
@@ -28,17 +37,22 @@ const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
                 </DialogTitle>
                 <DialogContent>
                     <TextField
+                        value={categoryName}
+                        onChange={(event) => setCategoryName(event.target.value)}
                         autoFocus
                         margin='dense'
                         fullWidth
-                        placeholder={editMode ? 'todo' : 'category name' }
+                        placeholder={editMode ? 'todo' : 'New category name' }
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseCategoryDialog} color='primary'>
                         Cancel
                     </Button>
-                    <Button onClick={handleOpenCategoryDialog} color='primary'>
+                    <Button 
+                        onClick={editMode ? handleEditCategory : handleAddCategory} 
+                        color='primary'
+                    >
                         { editMode ? 'Save' : 'Add' }
                     </Button>
                 </DialogActions>

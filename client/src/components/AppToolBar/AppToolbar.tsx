@@ -14,7 +14,7 @@ const AppToolbar: React.FC = (): JSX.Element => {
 
     const classes = useStyles();
 
-    const mode = FormMode.EDIT; //toDO
+    const mode = FormMode.CREATE; //toDO
 
     const {
         openCategoryDialog,
