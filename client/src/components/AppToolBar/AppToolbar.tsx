@@ -80,7 +80,6 @@ const AppToolbar: React.FC = (): JSX.Element => {
             <CategoryDialog
                 open={openCategoryDialog}
                 mode={mode}
-                handleOpenCategoryDialog={handleOpenCategoryDialog}
                 handleCloseCategoryDialog={handleCloseCategoryDialog}
             />
         </AppBar>
