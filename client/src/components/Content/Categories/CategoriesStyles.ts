@@ -5,6 +5,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     categoriesSection: {
         padding: '20px 40px',
     },
+    categoryTitle: {
+        paddingBottom: '10px',
+        color: theme.palette.primary.dark,
+    },
     categoryCard: {
         color: 'white',
         backgroundColor: theme.palette.primary.light,

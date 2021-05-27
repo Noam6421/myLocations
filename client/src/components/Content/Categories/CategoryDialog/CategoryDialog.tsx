@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TextField, Typography, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@material-ui/core';
+import { TextField, Typography, Dialog, DialogActions, DialogContent, DialogTitle, Button, Grid } from '@material-ui/core';
 
 import FormMode from 'models/enums/FormMode';
 import StoreStateType from 'redux/storeStateType';
@@ -28,7 +28,7 @@ const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
     return (
         <>
             <Dialog open={open} onClose={handleCloseCategoryDialog}>
-                <DialogTitle>
+                <DialogTitle color='primary'>
                     { viewMode 
                         ? VIEW_CATEGORY_TITLE 
                         : editMode
@@ -37,19 +37,22 @@ const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
                     }
                 </DialogTitle>
                 <DialogContent>
-                    { viewMode ? 
-                        <Typography>Name: {selectedCategory}</Typography>
-                        :
-                        <TextField
-                            value={categoryName === '' ? selectedCategory : categoryName}
-                            onChange={(event) => setCategoryName(event.target.value)}
-                            autoFocus
-                            margin='dense'
-                            fullWidth
-                            placeholder={editMode ? 'todo' : 'New category name' }
-                        />
-                    }
-                   
+                    <Grid container direction='row' xs={12} alignItems='center'>
+                        <Grid item xs={3}>
+                            <Typography>Name:</Typography>
+                        </Grid>
+                        <Grid item xs={9}>
+                            <TextField
+                                value={categoryName === '' ? selectedCategory : categoryName}
+                                onChange={(event) => setCategoryName(event.target.value)}
+                                autoFocus
+                                margin='dense'
+                                fullWidth
+                                disabled={viewMode}
+                                placeholder={editMode ? 'todo' : 'New category name' }
+                            />
+                        </Grid>
+                    </Grid>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseCategoryDialog} color='primary'>

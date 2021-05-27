@@ -26,26 +26,29 @@ const Categories: React.FC<Props> = (): JSX.Element => {
                 className={classes.categoriesSection}
             >
                 <Grid item xs={12}>
-                    <Typography>Categories:</Typography>
+                    <Typography variant='h5' className={classes.categoryTitle}>Categories:</Typography>
+                    { categories.length === 0 &&
+                        <Typography variant='subtitle1'>
+                            You don't have any categories yet, add your first category now by clicking the Add New Category button.
+                        </Typography>
+                    }
                 </Grid>
-                {
-                    categories.map((category) => {
-                        return (
-                            <Grid item xs={3} key={category.name}>
-                                <Card 
-                                    onClick={() => setSelectedCategory(selectedCategory === category.name ? '' : category.name)} 
-                                    className={
-                                        category.name === selectedCategory
-                                        ? classes.categoryCardSelected
-                                        : classes.categoryCard
-                                    }
-                                >
-                                    {category.name}
-                                </Card>
-                            </Grid>
-                        )
-                    })
-                }
+                { categories.map((category) => {
+                    return (
+                        <Grid item xs={3} key={category.name}>
+                            <Card 
+                                onClick={() => setSelectedCategory(selectedCategory === category.name ? '' : category.name)} 
+                                className={
+                                    category.name === selectedCategory
+                                    ? classes.categoryCardSelected
+                                    : classes.categoryCard
+                                }
+                            >
+                                {category.name}
+                            </Card>
+                        </Grid>
+                    )
+                })}
             </Grid>
         </>
     )

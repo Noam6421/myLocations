@@ -5,7 +5,7 @@ const initialState: string = '';
 const selectedCategoryReducer = (state = initialState, action: Actions.SelectedCategoryAction): string => {
     switch (action.type) {
         case Actions.SET_SELECTED_CATEGORY: 
-            return action.payload.categoryName;
+            return action.payload;
         default: 
             return state;
     };
