@@ -40,8 +40,8 @@ const Categories: React.FC<Props> = (): JSX.Element => {
                                 onClick={() => setSelectedCategory(selectedCategory === category.name ? '' : category.name)} 
                                 className={
                                     category.name === selectedCategory
-                                    ? classes.categoryCardSelected
-                                    : classes.categoryCard
+                                    ? [classes.categoryCard , classes.categoryCardSelected].join(' ')
+                                    : [classes.categoryCard , classes.categoryUnSelectedCard].join(' ')
                                 }
                             >
                                 {category.name}

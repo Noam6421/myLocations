@@ -56,7 +56,7 @@ const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
                             />
                         </Grid>
                     </Grid>
-                    {error && <Typography>{ERROR_MESSAGE}</Typography>}
+                    {(error && !viewMode) && <Typography>{ERROR_MESSAGE}</Typography>}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseCategoryDialog} color='primary'>

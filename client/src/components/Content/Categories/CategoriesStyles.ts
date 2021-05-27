@@ -11,11 +11,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     categoryCard: {
         color: 'white',
-        backgroundColor: theme.palette.primary.light,
         maxWidth: 300,
         margin: 'auto',
         transition: '0.3s',
+        padding: '10px',
         boxShadow: '0 8px 40px -12px rgba(0,0,0,0.3)',
+    },
+    categoryUnSelectedCard:{
+        backgroundColor: theme.palette.primary.light,
     },
     categoryCardSelected: {
         boxShadow: '0 16px 70px -12.125px rgba(0,0,0,0.3)',
