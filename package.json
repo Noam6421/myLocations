@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Noam6421/myLocations/issues"
   },
-  "homepage": "https://github.com/Noam6421/myLocations#readme"
+  "homepage": "https://github.com/Noam6421/myLocations#readme",
+  "dependencies": {
+    "react-scripts": "^4.0.3"
+  }
 }
