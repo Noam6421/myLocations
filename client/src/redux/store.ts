@@ -1,16 +1,15 @@
 import thunk from 'redux-thunk';
+import storage from 'redux-persist/lib/storage';
 import { createStore, applyMiddleware, compose } from 'redux';
-import storageSession from 'redux-persist/lib/storage/session';
+import { PersistPartial } from 'redux-persist/lib/persistReducer';
 import { persistStore, persistReducer, PersistConfig } from 'redux-persist'
-
-import Category from 'models/Category';
 
 import reducers from './reducers';
 import StoreStateType from './storeStateType';
 
-const saveToLocalStorage = (categories: Category[]) => {
+const saveToLocalStorage = (state: StoreStateType & PersistPartial) => {
     try {
-        const localStorageCategories = JSON.stringify(categories);
+        const localStorageCategories = JSON.stringify(state.categories);
         localStorage.setItem('categories', localStorageCategories);
     } catch (e) {
         console.warn(e);
@@ -20,7 +19,7 @@ const saveToLocalStorage = (categories: Category[]) => {
 const loadFromLocalStorage = () => {
     try {
         const localStorageCategories = localStorage.getItem('categories');
-        if (localStorageCategories === null) return undefined;
+        if (localStorageCategories === null) return {categories: [], selectedCategory: ''};
         return JSON.parse(localStorageCategories);
     } catch (e) {
         console.warn(e);
@@ -30,7 +29,7 @@ const loadFromLocalStorage = () => {
   
 const persistConfig: PersistConfig<StoreStateType> = {
     key: 'root',
-    storage: storageSession
+    storage: storage
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -40,4 +39,4 @@ export const store = createStore(persistedReducer, loadFromLocalStorage(), compo
 
 export const persistor = persistStore(store);
 
-store.subscribe(() => saveToLocalStorage(store.getState().categories));
+store.subscribe(() => saveToLocalStorage(store.getState()));
