@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { AppBar, Button, Grid, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Grid, Toolbar, Typography } from '@material-ui/core';
 
 import FormMode from 'models/enums/FormMode';
 import { indexRoute } from 'Utils/Routes/Routes';
@@ -11,6 +11,7 @@ import CategoryDialog from 'components/Content/Categories/CategoryDialog/Categor
 
 import useStyles from './AppToolbarStyles';
 import useAppToolbar from './useAppToolbar';
+import ActionButton from 'components/ActionButton/ActionButton';
 
 const AppToolbar: React.FC = (): JSX.Element => {
 
@@ -30,49 +31,46 @@ const AppToolbar: React.FC = (): JSX.Element => {
     return (
         <AppBar className={classes.appBar} position='static'>
             <Toolbar>
-                <Grid container alignItems='center'>
-                    <NavLink exact to={indexRoute} className={classes.menuItem}>
-                        <img id='logo' alt='logo' src='./assets/logo.png' width={79} height={60} />
-                        <Typography variant='h5' className={classes.title} id='title'>myLocations</Typography>
-                    </NavLink>
-                </Grid>
-                <Grid container alignItems='center'>
-                { selectedCategory === '' ?
-                    <Button 
-                        variant='outlined' 
-                        color='primary' 
-                        onClick={() => {
-                            setMode(FormMode.CREATE);
-                            handleOpenCategoryDialog();
-                        }}
-                    >
-                        Add New Category
-                    </Button>
-                    :
-                    <>
-                        <Button
-                            variant='outlined'
-                            color='primary'
-                            onClick={() => {
-                                setMode(FormMode.VIEW);
-                                handleOpenCategoryDialog();
-                            } }
-                        >
-                            View
-                        </Button><Button
-                            variant='outlined'
-                            color='primary'
-                            onClick={() => {
-                                setMode(FormMode.EDIT);
-                                handleOpenCategoryDialog();
-                            } }
-                        >
-                                Edit
-                            </Button><Button variant='outlined' color='primary' onClick={() => handleDeleteCategory(selectedCategory)}>
-                                Delete
-                            </Button>
-                    </>
-                }
+                <Grid
+                    container 
+                    spacing={2} 
+                    direction='row'
+                    xs={12} 
+                    alignItems='center' 
+                    justify='space-between'
+                >
+                    <Grid item container alignItems='center' xs={4}>
+                        <NavLink exact to={indexRoute} className={classes.menuItem}>
+                            <img id='logo' alt='logo' src='./assets/logo.png' width={79} height={60} />
+                            <Typography variant='h5' className={classes.title} id='title'>myLocations</Typography>
+                        </NavLink>
+                    </Grid>
+                    <Grid item container alignItems='center' xs={8} justify='flex-end' spacing={1}>
+                    { selectedCategory === '' ?
+                        <ActionButton 
+                            mode={() => setMode(FormMode.CREATE)}
+                            action={() => handleOpenCategoryDialog()}
+                            text={'Add New Category'}    
+                        />  
+                        :
+                        <>
+                            <ActionButton 
+                                mode={() => setMode(FormMode.VIEW)}
+                                action={() => handleOpenCategoryDialog()}
+                                text={'View'}    
+                            />
+                            <ActionButton 
+                                mode={() => setMode(FormMode.EDIT)}
+                                action={() => handleOpenCategoryDialog()}
+                                text={'Edit'}    
+                            />
+                            <ActionButton 
+                                action={() => handleDeleteCategory(selectedCategory)}
+                                text={'Delete'}    
+                            />
+                        </>
+                    }
+                    </Grid>
                 </Grid>
 
             </Toolbar>

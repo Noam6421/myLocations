@@ -6,7 +6,8 @@ const useStyles = makeStyles((theme: Theme) => ({
         padding: '20px 40px',
     },
     categoryTitle: {
-        paddingBottom: '10px'
+        paddingBottom: '10px',
+        color: theme.palette.primary.dark,
     },
     categoryCard: {
         color: 'white',

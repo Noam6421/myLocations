@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         justifyContent: 'space-between',
         textDecoration: 'none',
     },
+    actionButton: {
+        marginLeft: '10px'
+    },
 }));
 
 export default useStyles;
