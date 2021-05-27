@@ -7,11 +7,11 @@ import { AppBar, Grid, Toolbar, Typography } from '@material-ui/core';
 import FormMode from 'models/enums/FormMode';
 import { indexRoute } from 'Utils/Routes/Routes';
 import StoreStateType from 'redux/storeStateType';
+import ActionButton from 'components/ActionButton/ActionButton';
 import CategoryDialog from 'components/Content/Categories/CategoryDialog/CategoryDialog';
 
 import useStyles from './AppToolbarStyles';
 import useAppToolbar from './useAppToolbar';
-import ActionButton from 'components/ActionButton/ActionButton';
 
 const AppToolbar: React.FC = (): JSX.Element => {
 
@@ -72,7 +72,6 @@ const AppToolbar: React.FC = (): JSX.Element => {
                     }
                     </Grid>
                 </Grid>
-
             </Toolbar>
             
             <CategoryDialog

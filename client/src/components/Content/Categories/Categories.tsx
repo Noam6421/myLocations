@@ -52,7 +52,7 @@ const Categories: React.FC<Props> = (): JSX.Element => {
             </Grid>
         </>
     )
-}
+};
 
 interface Props {
 

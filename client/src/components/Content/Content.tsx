@@ -5,7 +5,6 @@ import { indexRoute } from 'Utils/Routes/Routes';
 import Categories from './Categories/Categories';
 
 const Content: React.FC<Props> = (): JSX.Element => {
-
     return (
         <>
             <Switch>
@@ -13,7 +12,7 @@ const Content: React.FC<Props> = (): JSX.Element => {
             </Switch>
         </>
     )
-}
+};
 
 interface Props {
 

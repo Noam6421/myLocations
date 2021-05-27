@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { deleteCategory } from 'redux/Categories/categoriesActionCreators';
 import { setSelectedCategory } from 'redux/SelectedCategory/selectedCategoryActionCreators';
 
@@ -24,7 +25,7 @@ const useAppToolbar = () :  useAppToolbarOutcome => {
         handleOpenCategoryDialog,
         handleCloseCategoryDialog,
         handleDeleteCategory
-    }
+    };
 };
 
 export interface useAppToolbarOutcome {

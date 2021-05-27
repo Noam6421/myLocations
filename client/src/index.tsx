@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react'
 import { MuiThemeProvider } from '@material-ui/core/styles';
+import { PersistGate } from 'redux-persist/integration/react'
 
 import './index.css';
 import theme from './styles/theme';

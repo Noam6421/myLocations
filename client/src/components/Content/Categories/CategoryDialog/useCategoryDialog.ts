@@ -16,13 +16,13 @@ const useCategoryDialog = (props: Props) :  useAppToolbarOutcome => {
     const [categoryName, setCategoryName] = useState<string>('');
     const [error, setError] = useState<boolean>(false);
 
-    useEffect(() => {
-        setCategoryName(selectedCategory)
-    }, [selectedCategory]);
-    
     const checkDuplicate = () => {
         return categories.find(({name}) => name === categoryName);
     };
+
+    useEffect(() => {
+        setCategoryName(selectedCategory)
+    }, [selectedCategory]);
 
     useEffect(() => {
         const duplicate = checkDuplicate();

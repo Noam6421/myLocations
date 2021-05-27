@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { TextField, Typography, Dialog, DialogActions, DialogContent, DialogTitle, Button, Grid } from '@material-ui/core';
 
@@ -45,13 +45,14 @@ const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
                         </Grid>
                         <Grid item xs={9}>
                             <TextField
-                                value={categoryName === '' ? selectedCategory : categoryName}
+                                defaultValue={categoryName === '' ? selectedCategory : categoryName}
+                                value={categoryName}
                                 onChange={(event) => setCategoryName(event.target.value)}
                                 autoFocus
                                 margin='dense'
                                 fullWidth
                                 disabled={viewMode}
-                                placeholder={editMode ? 'todo' : 'New category name' }
+                                placeholder={editMode ? '' : 'New category name' }
                                 error={error}
                             />
                         </Grid>
@@ -74,7 +75,7 @@ const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
             </Dialog>
         </>
     );
-}
+};
 
 interface Props {
     open: boolean;

@@ -24,9 +24,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         boxShadow: '0 16px 70px -12.125px rgba(0,0,0,0.3)',
         backgroundColor: theme.palette.primary.main,
     },
-    categoryLink: {
-        textDecoration: 'none',
-    },
 }));
 
 export default useStyles;

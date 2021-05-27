@@ -7,7 +7,6 @@ import AppToolbar from './AppToolBar/AppToolbar';
 config();
 
 const App: React.FC = (): JSX.Element => {
-
     return (
         <>
             <AppToolbar />

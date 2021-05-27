@@ -61,37 +61,12 @@ const theme = createMuiTheme({
                 minHeight: '40px'
             }
         },
-        MuiInputLabel: {
-            root: {
-                fontSize: 16,
-                fontWeight: 500
-            }
-        },
-        MuiSelect: {
-            select: {
-                '&:focus': {
-                    borderRadius: '14px',
-                    backgroundColor: 'transperant'
-                }
-            }
-        },
-        MuiTableCell: {
-            root: {
-                textAlign: 'center',
-                fontWeight: 500
-            }
-        },
         MuiTypography: {
             body1: {
                 fontWeight: 500,
                 fontSize: '16px',
             },
         },
-        MuiTab: {
-            wrapper: {
-                fontWeight: 500
-            }
-        }
     },
     props: {
         MuiTextField: {
