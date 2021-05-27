@@ -10,6 +10,7 @@ import useCategoryDialog from './useCategoryDialog';
 const VIEW_CATEGORY_TITLE = 'Category:';
 const CREATE_CATEGORY_TITLE = 'Add Category:';
 const EDIT_CATEGORY_TITLE = 'Edit Category:';
+const ERROR_MESSAGE = 'This category already exists, please change name';
 
 const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
 
@@ -19,7 +20,8 @@ const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
 
     const {
         categoryName, setCategoryName,
-        handleAddCategory, handleEditCategory
+        handleAddCategory, handleEditCategory,
+        error
     } = useCategoryDialog({ handleCloseCategoryDialog });
 
     const viewMode = mode === FormMode.VIEW;
@@ -50,9 +52,11 @@ const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
                                 fullWidth
                                 disabled={viewMode}
                                 placeholder={editMode ? 'todo' : 'New category name' }
+                                error={error}
                             />
                         </Grid>
                     </Grid>
+                    {error && <Typography>{ERROR_MESSAGE}</Typography>}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseCategoryDialog} color='primary'>
