@@ -7,6 +7,8 @@ import { persistStore, persistReducer, PersistConfig } from 'redux-persist'
 import reducers from './reducers';
 import StoreStateType from './storeStateType';
 
+const initialState = {categories: [], locations: [], selectedCategory: '', selectedLocation: ''};
+
 const saveToLocalStorage = (state: StoreStateType & PersistPartial) => {
     try {
         const localStorageCategories = JSON.stringify(state.categories);
@@ -25,9 +27,9 @@ const loadFromLocalStorage = () => {
         if (localStorageCategories === null || localStorageLocations === null) {
             return localStorageCategories === null 
                 ? localStorageLocations === null
-                    ?  {categories: [], locations: [], selectedCategory: ''}                   
-                    : {categories: [], selectedCategory: '', locations: JSON.parse(localStorageLocations)}
-                : {locations: [], selectedCategory: '', categories: JSON.parse(localStorageCategories)}
+                    ?  initialState                   
+                    : {...initialState, locations: JSON.parse(localStorageLocations)}
+                : {...initialState, categories: JSON.parse(localStorageCategories)}
         } 
     } catch (e) {
         console.warn(e);

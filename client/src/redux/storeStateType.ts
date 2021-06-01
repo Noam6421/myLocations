@@ -5,4 +5,5 @@ export default interface StoreStateType {
     categories: Category[];
     selectedCategory: string;
     locations: Location[];
+    selectedLocation: string;
 };
