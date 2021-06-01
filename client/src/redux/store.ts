@@ -11,6 +11,8 @@ const saveToLocalStorage = (state: StoreStateType & PersistPartial) => {
     try {
         const localStorageCategories = JSON.stringify(state.categories);
         localStorage.setItem('categories', localStorageCategories);
+        const localStorageLocations = JSON.stringify(state.locations);
+        localStorage.setItem('locations', localStorageLocations);
     } catch (e) {
         console.warn(e);
     }
@@ -19,8 +21,14 @@ const saveToLocalStorage = (state: StoreStateType & PersistPartial) => {
 const loadFromLocalStorage = () => {
     try {
         const localStorageCategories = localStorage.getItem('categories');
-        if (localStorageCategories === null) return {categories: [], selectedCategory: ''};
-        return JSON.parse(localStorageCategories);
+        const localStorageLocations = localStorage.getItem('locations');
+        if (localStorageCategories === null || localStorageLocations === null) {
+            return localStorageCategories === null 
+                ? localStorageLocations === null
+                    ?  {categories: [], locations: [], selectedCategory: ''}                   
+                    : {categories: [], selectedCategory: '', locations: JSON.parse(localStorageLocations)}
+                : {locations: [], selectedCategory: '', categories: JSON.parse(localStorageCategories)}
+        } 
     } catch (e) {
         console.warn(e);
         return undefined;
