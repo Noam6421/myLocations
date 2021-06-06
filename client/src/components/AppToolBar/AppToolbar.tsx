@@ -13,19 +13,22 @@ import CategoryDialog from 'components/Content/Categories/CategoryDialog/Categor
 import useStyles from './AppToolbarStyles';
 import useAppToolbar from './useAppToolbar';
 
-const AppToolbar: React.FC = (): JSX.Element => {
+const AppToolbar: React.FC<Props> = (props: Props): JSX.Element => {
+
+    const { currentPage } = props;
 
     const classes = useStyles();
 
     const [mode, setMode] = useState<FormMode>(FormMode.VIEW);
 
     const selectedCategory = useSelector<StoreStateType, string>(state => state.selectedCategory);
+    const selectedLocation = useSelector<StoreStateType, string>(state => state.selectedLocation);
 
     const {
         openCategoryDialog,
         handleOpenCategoryDialog,
         handleCloseCategoryDialog,
-        handleDeleteCategory
+        handleDeleteCategory,
     } = useAppToolbar();
 
     return (
@@ -45,32 +48,61 @@ const AppToolbar: React.FC = (): JSX.Element => {
                             <Typography variant='h5' className={classes.title} id='title'>myLocations</Typography>
                         </NavLink>
                     </Grid>
-                    <Grid item container alignItems='center' xs={8} justify='flex-end' spacing={1}>
-                    { selectedCategory === '' ?
-                        <ActionButton 
-                            mode={() => setMode(FormMode.CREATE)}
-                            action={() => handleOpenCategoryDialog()}
-                            text={'Add New Category'}    
-                        />  
-                        :
-                        <>
+                    { currentPage === '/locations' ?
+                        <Grid item container alignItems='center' xs={8} justify='flex-end' spacing={1}>
+                        { selectedLocation === '' ?
                             <ActionButton 
-                                mode={() => setMode(FormMode.VIEW)}
+                                mode={() => setMode(FormMode.CREATE)}
                                 action={() => handleOpenCategoryDialog()}
-                                text={'View'}    
-                            />
+                                text={'Add New Location'}    
+                            />  
+                            :
+                            <>
+                                <ActionButton 
+                                    mode={() => setMode(FormMode.VIEW)}
+                                    action={() => handleOpenCategoryDialog()}
+                                    text={'View'}    
+                                />
+                                <ActionButton 
+                                    mode={() => setMode(FormMode.EDIT)}
+                                    action={() => handleOpenCategoryDialog()}
+                                    text={'Edit'}    
+                                />
+                                <ActionButton 
+                                    action={() => handleDeleteCategory(selectedCategory)}
+                                    text={'Delete'}    
+                                />
+                            </>
+                        }
+                        </Grid>
+                    :
+                        <Grid item container alignItems='center' xs={8} justify='flex-end' spacing={1}>
+                        { selectedCategory === '' ?
                             <ActionButton 
-                                mode={() => setMode(FormMode.EDIT)}
+                                mode={() => setMode(FormMode.CREATE)}
                                 action={() => handleOpenCategoryDialog()}
-                                text={'Edit'}    
-                            />
-                            <ActionButton 
-                                action={() => handleDeleteCategory(selectedCategory)}
-                                text={'Delete'}    
-                            />
-                        </>
+                                text={'Add New Category'}    
+                            />  
+                            :
+                            <>
+                                <ActionButton 
+                                    mode={() => setMode(FormMode.VIEW)}
+                                    action={() => handleOpenCategoryDialog()}
+                                    text={'View'}    
+                                />
+                                <ActionButton 
+                                    mode={() => setMode(FormMode.EDIT)}
+                                    action={() => handleOpenCategoryDialog()}
+                                    text={'Edit'}    
+                                />
+                                <ActionButton 
+                                    action={() => handleDeleteCategory(selectedCategory)}
+                                    text={'Delete'}    
+                                />
+                            </>
+                        }
+                        </Grid>
                     }
-                    </Grid>
                 </Grid>
             </Toolbar>
             
@@ -81,6 +113,10 @@ const AppToolbar: React.FC = (): JSX.Element => {
             />
         </AppBar>
     );
+};
+
+interface Props {
+    currentPage: string;
 };
 
 export default AppToolbar;

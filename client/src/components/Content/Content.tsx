@@ -10,8 +10,8 @@ const Content: React.FC<Props> = (): JSX.Element => {
     return (
         <>
             <Switch>
-                <Route path={indexRoute} component={Categories} />
                 <Route path={locationsRoute} component={Locations} />
+                <Route path={indexRoute} component={Categories} />
             </Switch>
         </>
     )

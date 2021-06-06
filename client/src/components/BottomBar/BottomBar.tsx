@@ -8,7 +8,9 @@ import { indexRoute, locationsRoute } from 'Utils/Routes/Routes';
 
 import useStyles from './BottomBarStyles';
 
-const BottomBar: React.FC = (): JSX.Element => {
+const BottomBar: React.FC<Props> = (props: Props): JSX.Element => {
+
+    const { setCurrentPage } = props;
 
     const classes = useStyles();
 
@@ -23,13 +25,25 @@ const BottomBar: React.FC = (): JSX.Element => {
                     wrap='nowrap'
                 >
                     <Grid item alignItems='center' xs={6} className={classes.item}>
-                        <NavLink exact to={indexRoute} className={classes.navLink} activeStyle={{ color: theme.palette.primary.dark }}>
+                        <NavLink 
+                            exact 
+                            to={indexRoute} 
+                            onClick={() => setCurrentPage(indexRoute)} 
+                            className={classes.navLink} 
+                            activeStyle={{ color: theme.palette.primary.dark }}
+                        >
                             Categories
                         </NavLink>
                     </Grid>
                     <Divider orientation='vertical' flexItem/>
                     <Grid item alignItems='center' xs={6} className={classes.item}>
-                        <NavLink exact to={locationsRoute} className={classes.navLink} activeStyle={{ color: theme.palette.primary.dark }}>
+                        <NavLink 
+                            exact 
+                            to={locationsRoute} 
+                            onClick={() => setCurrentPage(locationsRoute)} 
+                            className={classes.navLink} 
+                            activeStyle={{ color: theme.palette.primary.dark }}
+                        >
                             Locations
                         </NavLink>
                     </Grid>
@@ -37,6 +51,10 @@ const BottomBar: React.FC = (): JSX.Element => {
             </Toolbar>
         </AppBar>
     );
+};
+
+interface Props {
+    setCurrentPage: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default BottomBar;
