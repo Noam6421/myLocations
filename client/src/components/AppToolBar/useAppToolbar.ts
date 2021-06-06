@@ -24,7 +24,7 @@ const useAppToolbar = () :  useAppToolbarOutcome => {
         openCategoryDialog,
         handleOpenCategoryDialog,
         handleCloseCategoryDialog,
-        handleDeleteCategory
+        handleDeleteCategory, 
     };
 };
 

@@ -26,7 +26,7 @@ const Locations: React.FC<Props> = (): JSX.Element => {
                 className={classes.locationsSection}
             >
                 <Grid item xs={12}>
-                    <Typography variant='h5' className={classes.locationTitle}>Categories:</Typography>
+                    <Typography variant='h5' className={classes.locationTitle}>Locations:</Typography>
                     { locations.length === 0 &&
                         <Typography variant='subtitle1'>
                             You don't have any locations yet, add your first location now by clicking the Add New Location button.
