@@ -1,42 +1,41 @@
   
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { AppBar, BottomNavigation, BottomNavigationAction, Grid, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Divider, Grid, Toolbar } from '@material-ui/core';
 
-import FormMode from 'models/enums/FormMode';
-import { indexRoute } from 'Utils/Routes/Routes';
-import StoreStateType from 'redux/storeStateType';
-import ActionButton from 'components/ActionButton/ActionButton';
-import CategoryDialog from 'components/Content/Categories/CategoryDialog/CategoryDialog';
+import theme from 'styles/theme';
+import { indexRoute, locationsRoute } from 'Utils/Routes/Routes';
 
 import useStyles from './BottomBarStyles';
 
 const BottomBar: React.FC = (): JSX.Element => {
 
     const classes = useStyles();
-    const [value, setValue] = useState(0);
 
     return (
-        <BottomNavigation
-            value={value}
-            onChange={(event, newValue) => {
-                setValue(newValue);
-            }}
-            showLabels
-            className={classes.root}
-        >
-            <NavLink exact to={indexRoute} className={classes.menuItem}>
-                <BottomNavigationAction label='Categories'
-                //  icon={<RestoreIcon />} 
-                />
-            </NavLink>
-            <NavLink exact to={indexRoute} className={classes.menuItem}>
-                <BottomNavigationAction label='Locations'
-                // icon={<FavoriteIcon />} 
-                />
-            </NavLink>
-        </BottomNavigation>
+        <AppBar className={classes.bottomBar} position='fixed'>
+            <Toolbar>
+                <Grid
+                    container 
+                    direction='row'
+                    xs={12} 
+                    alignItems='center' 
+                    wrap='nowrap'
+                >
+                    <Grid item alignItems='center' xs={6} className={classes.item}>
+                        <NavLink exact to={indexRoute} className={classes.navLink} activeStyle={{ color: theme.palette.primary.dark }}>
+                            Categories
+                        </NavLink>
+                    </Grid>
+                    <Divider orientation='vertical' flexItem/>
+                    <Grid item alignItems='center' xs={6} className={classes.item}>
+                        <NavLink exact to={locationsRoute} className={classes.navLink} activeStyle={{ color: theme.palette.primary.dark }}>
+                            Locations
+                        </NavLink>
+                    </Grid>
+                </Grid>
+            </Toolbar>
+        </AppBar>
     );
 };
 
