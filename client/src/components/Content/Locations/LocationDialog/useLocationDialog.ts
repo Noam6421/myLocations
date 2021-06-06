@@ -37,7 +37,7 @@ const useLocationDialog = (props: Props) :  useAppToolbarOutcome => {
         if (error) {
             return;
         }
-        createLocation({name: locationName});
+        //createLocation({name: locationName});
         handleCloseLocationDialog();
         setLocationName('');
         setError(false);
@@ -47,7 +47,7 @@ const useLocationDialog = (props: Props) :  useAppToolbarOutcome => {
         if (error) {
             return;
         }
-        editLocation({name: selectedLocation}, locationName);
+        //editLocation({name: selectedLocation}, locationName);
         handleCloseLocationDialog();
         setSelectedLocation(locationName);
         setLocationName('');
