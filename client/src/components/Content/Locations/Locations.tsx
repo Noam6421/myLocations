@@ -37,7 +37,7 @@ const Locations: React.FC<Props> = (): JSX.Element => {
                     return (
                         <Grid item xs={3} key={location.name}>
                             <Card 
-                                onClick={() => setSelectedLocation(selectedLocation.name === location.name ? initalSelectedLocation : selectedLocation)} 
+                                onClick={() => setSelectedLocation(selectedLocation.name === location.name ? initalSelectedLocation : location)} 
                                 className={
                                     location.name === selectedLocation.name
                                     ? [classes.locationCard , classes.locationCardSelected].join(' ')
