@@ -20,11 +20,10 @@ const BottomBar: React.FC<Props> = (props: Props): JSX.Element => {
                 <Grid
                     container 
                     direction='row'
-                    xs={12} 
                     alignItems='center' 
                     wrap='nowrap'
                 >
-                    <Grid item alignItems='center' xs={6} className={classes.item}>
+                    <Grid item xs={6} className={classes.item}>
                         <NavLink 
                             exact 
                             to={indexRoute} 
@@ -36,7 +35,7 @@ const BottomBar: React.FC<Props> = (props: Props): JSX.Element => {
                         </NavLink>
                     </Grid>
                     <Divider orientation='vertical' flexItem/>
-                    <Grid item alignItems='center' xs={6} className={classes.item}>
+                    <Grid item xs={6} className={classes.item}>
                         <NavLink 
                             exact 
                             to={locationsRoute} 

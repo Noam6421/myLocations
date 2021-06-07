@@ -44,7 +44,6 @@ const AppToolbar: React.FC<Props> = (props: Props): JSX.Element => {
                     container 
                     spacing={2} 
                     direction='row'
-                    xs={12} 
                     alignItems='center' 
                     justify='space-between'
                 >
