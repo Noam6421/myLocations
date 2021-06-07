@@ -39,7 +39,7 @@ const CategoryDialog: React.FC<Props> = (props: Props): JSX.Element => {
                     }
                 </DialogTitle>
                 <DialogContent>
-                    <Grid container direction='row' xs={12} alignItems='center'>
+                    <Grid container direction='row' alignItems='center'>
                         <Grid item xs={3}>
                             <Typography>Name:</Typography>
                         </Grid>
