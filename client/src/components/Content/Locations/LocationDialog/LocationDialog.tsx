@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { TextField, Typography, Dialog, DialogActions, DialogContent, DialogTitle, Button, Grid, Select, MenuItem } from '@material-ui/core';
+import { TextField, Typography, Dialog, DialogActions, DialogContent, DialogTitle, Button, Grid, Select, MenuItem, FormControl } from '@material-ui/core';
 
 import Location from 'models/Location';
 import Category from 'models/Category';
@@ -8,6 +8,8 @@ import FormMode from 'models/enums/FormMode';
 import StoreStateType from 'redux/storeStateType';
 
 import LocationFields from './LocationFields';
+import useStyles from './LocationDialogStyles';
+import LocationMap from './LocationMap/LocationMap';
 import useLocationDialog from './useLocationDialog';
 import LocationFieldsNames from './LocationFieldsNames';
 
@@ -17,6 +19,8 @@ const EDIT_LOCATION_TITLE = 'Edit Location:';
 const ERROR_MESSAGE = 'This location already exists, please change name';
 
 const LocationDialog: React.FC<Props> = (props: Props): JSX.Element => {
+
+    const classes = useStyles();
 
     const { open, mode, handleCloseLocationDialog } = props;
     
@@ -32,6 +36,11 @@ const LocationDialog: React.FC<Props> = (props: Props): JSX.Element => {
     const createMode = mode === FormMode.CREATE;
     const editMode = mode === FormMode.EDIT;
 
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
+        editMode ? handleEditLocation() : handleAddLocation();
+    };
+
     return (
         <>
             <Dialog open={open} onClose={handleCloseLocationDialog}>
@@ -43,8 +52,8 @@ const LocationDialog: React.FC<Props> = (props: Props): JSX.Element => {
                             : CREATE_LOCATION_TITLE
                     }
                 </DialogTitle>
-                <DialogContent>
-                    <form id='locationForm'>
+                <DialogContent className={classes.dialogContent}>
+                    <form id='locationForm' onSubmit={(e) => handleSubmit(e)}>
                         <Grid container direction='row' alignItems='center'>
                             <Grid item xs={3}>
                                 <Typography>{LocationFieldsNames.NAME}</Typography>
@@ -56,7 +65,6 @@ const LocationDialog: React.FC<Props> = (props: Props): JSX.Element => {
                                     onChange={(event) => setCurrentLocation({...currentLocation, name: event.target.value})}
                                     autoFocus
                                     margin='dense'
-                                    fullWidth
                                     required
                                     disabled={viewMode}
                                     placeholder={editMode ? '' : 'New location name' }
@@ -76,7 +84,6 @@ const LocationDialog: React.FC<Props> = (props: Props): JSX.Element => {
                                     onChange={(event) => setCurrentLocation({...currentLocation, address: event.target.value})}
                                     autoFocus
                                     margin='dense'
-                                    fullWidth
                                     required
                                     disabled={viewMode}
                                     placeholder={editMode ? '' : 'Location address' }
@@ -84,78 +91,89 @@ const LocationDialog: React.FC<Props> = (props: Props): JSX.Element => {
                                 />
                             </Grid>
                         </Grid>
+                        { !viewMode && 
+                            <>
+                            <Grid container direction='row' alignItems='center'>
+                                <Grid item xs={3}>
+                                    <Typography>{LocationFieldsNames.LATITUDE}</Typography>
+                                </Grid>
+                                <Grid item xs={9}>
+                                    <TextField
+                                        name={LocationFields.LATITUDE}
+                                        value={currentLocation.cordinates?.latitude}
+                                        onChange={(event) => setCurrentLocation({...currentLocation, cordinates: {...currentLocation.cordinates, latitude: +event.target.value}})}
+                                        autoFocus
+                                        margin='dense'
+                                        required
+                                        disabled={viewMode}
+                                        inputProps={{pattern: '^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$'}}
+                                        placeholder={editMode ? '' : 'Location latitude' }
+                                        error={error}
+                                    />
+                                </Grid>
+                            </Grid>
 
-                        <Grid container direction='row' alignItems='center'>
-                            <Grid item xs={3}>
-                                <Typography>{LocationFieldsNames.LATITUDE}</Typography>
+                            <Grid container direction='row' alignItems='center'>
+                                <Grid item xs={3}>
+                                    <Typography>{LocationFieldsNames.LONGITUDE}</Typography>
+                                </Grid>
+                                <Grid item xs={9}>
+                                    <TextField
+                                        name={LocationFields.LONGITUDE}
+                                        value={currentLocation.cordinates?.longitude}
+                                        onChange={(event) => setCurrentLocation({...currentLocation, cordinates: {...currentLocation.cordinates, longitude: +event.target.value}})}
+                                        autoFocus
+                                        margin='dense'
+                                        required
+                                        disabled={viewMode}
+                                        inputProps={{pattern: '^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$'}}
+                                        placeholder={editMode ? '' : 'Location longitude' }
+                                        error={error}
+                                    />
+                                </Grid>
                             </Grid>
-                            <Grid item xs={9}>
-                                <TextField
-                                    name={LocationFields.LATITUDE}
-                                    value={currentLocation.cordinates?.latitude}
-                                    onChange={(event) => setCurrentLocation({...currentLocation, cordinates: {...currentLocation.cordinates, latitude: +event.target.value}})}
-                                    autoFocus
-                                    margin='dense'
-                                    fullWidth
-                                    required
-                                    disabled={viewMode}
-                                    inputProps={{pattern: '[0-9]'}}
-                                    placeholder={editMode ? '' : 'Location latitude' }
-                                    error={error}
-                                />
-                            </Grid>
-                        </Grid>
-
-                        <Grid container direction='row' alignItems='center'>
-                            <Grid item xs={3}>
-                                <Typography>{LocationFieldsNames.LONGITUDE}</Typography>
-                            </Grid>
-                            <Grid item xs={9}>
-                                <TextField
-                                    name={LocationFields.LONGITUDE}
-                                    value={currentLocation.cordinates?.longitude}
-                                    onChange={(event) => setCurrentLocation({...currentLocation, cordinates: {...currentLocation.cordinates, longitude: +event.target.value}})}
-                                    autoFocus
-                                    margin='dense'
-                                    fullWidth
-                                    required
-                                    disabled={viewMode}
-                                    placeholder={editMode ? '' : 'Location longitude' }
-                                    error={error}
-                                />
-                            </Grid>
-                        </Grid>
+                            </>
+                        }
                         
                         <Grid container direction='row' alignItems='center'>
                             <Grid item xs={3}>
-                                <Typography>Category:</Typography>
+                                <Typography>{LocationFieldsNames.CATEGORY}</Typography>
                             </Grid>
                             <Grid item xs={9}>
                                 { viewMode ?
                                     <TextField 
                                         value={currentLocation.category}
                                         disabled 
+                                        margin='dense'
                                     />
                                 :
-                                
-                                    <Select
-                                        name={LocationFields.CATEGORY}
-                                        required
-                                        value={currentLocation.category}
-                                        onChange={(event) => setCurrentLocation({...currentLocation, category: event.target.value as string})}
-                                    >
-                                        {
-                                            categories.map((category) => (
-                                                <MenuItem key={category.name} value={category.name}>
-                                                    {category.name}
-                                                </MenuItem>
-                                            ))
-                                        }
-                                    </Select>  
+                                    <FormControl variant='outlined'>
+                                        <Select
+                                            name={LocationFields.CATEGORY}
+                                            required
+                                            margin='dense'
+                                            value={currentLocation.category}
+                                            onChange={(event) => setCurrentLocation({...currentLocation, category: event.target.value as string})}
+                                        >
+                                            {
+                                                categories.map((category) => (
+                                                    <MenuItem key={category.name} value={category.name}>
+                                                        {category.name}
+                                                    </MenuItem>
+                                                ))
+                                            }
+                                        </Select>  
+                                    </FormControl>
                                 }
                             </Grid>
                         </Grid>
                         {(error && !viewMode) && <Typography>{ERROR_MESSAGE}</Typography>}
+                        { viewMode && 
+                            <LocationMap
+                                latitude={currentLocation.cordinates?.latitude}
+                                longitude={currentLocation.cordinates?.longitude}
+                            />
+                        }
                     </form>
                 </DialogContent>
                 <DialogActions>
@@ -164,7 +182,8 @@ const LocationDialog: React.FC<Props> = (props: Props): JSX.Element => {
                     </Button>
                     {!viewMode &&
                         <Button 
-                            onClick={() => editMode ? handleEditLocation() : handleAddLocation()} 
+                            form='locationForm'
+                            type='submit'
                             color='primary'
                         >
                             { editMode ? 'Save' : 'Add' }

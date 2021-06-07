@@ -38,11 +38,6 @@ const useLocationDialog = (props: Props) :  useAppToolbarOutcome => {
     };
 
     const handleEditLocation = () => {
-        console.log(selectedLocation)
-
-        if (error) {
-            return;
-        }
         editLocation(selectedLocation, currentLocation);
         handleCloseLocationDialog();
         setSelectedLocation(currentLocation);
