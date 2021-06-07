@@ -4,10 +4,12 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { PersistPartial } from 'redux-persist/lib/persistReducer';
 import { persistStore, persistReducer, PersistConfig } from 'redux-persist'
 
+import { initalSelectedLocation } from 'models/Location';
+
 import reducers from './reducers';
 import StoreStateType from './storeStateType';
 
-const initialState = {categories: [], locations: [], selectedCategory: '', selectedLocation: ''};
+const initialState = {categories: [], locations: [], selectedCategory: '', selectedLocation: initalSelectedLocation};
 
 const saveToLocalStorage = (state: StoreStateType & PersistPartial) => {
     try {

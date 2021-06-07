@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, Typography, Card } from '@material-ui/core';
 
-import Location from 'models/Location';
 import StoreStateType from 'redux/storeStateType';
-import { setSelectedCategory } from 'redux/SelectedCategory/selectedCategoryActionCreators';
+import Location, { initalSelectedLocation } from 'models/Location';
+import { setSelectedLocation } from 'redux/SelectedLocation/selectedLocationActionCreators';
 
 import useStyles from './LocationsStyles';
 
@@ -13,8 +13,8 @@ const Locations: React.FC<Props> = (): JSX.Element => {
     const classes = useStyles();
 
     const locations = useSelector<StoreStateType, Location[]>(state => state.locations);
-    const selectedCategory = useSelector<StoreStateType, string>(state => state.selectedCategory);
-    //todo selected location
+    const selectedLocation = useSelector<StoreStateType, Location>(state => state.selectedLocation);
+
     return (
         <>
             <Grid 
@@ -37,9 +37,9 @@ const Locations: React.FC<Props> = (): JSX.Element => {
                     return (
                         <Grid item xs={3} key={location.name}>
                             <Card 
-                                onClick={() => setSelectedCategory(selectedCategory === location.name ? '' : location.name)} 
+                                onClick={() => setSelectedLocation(selectedLocation.name === location.name ? initalSelectedLocation : location)} 
                                 className={
-                                    location.name === selectedCategory
+                                    location.name === selectedLocation.name
                                     ? [classes.locationCard , classes.locationCardSelected].join(' ')
                                     : [classes.locationCard , classes.locationUnSelectedCard].join(' ')
                                 }

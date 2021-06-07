@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { AppBar, Grid, Toolbar, Typography } from '@material-ui/core';
 
+import Location from 'models/Location';
 import FormMode from 'models/enums/FormMode';
 import { indexRoute } from 'Utils/Routes/Routes';
 import StoreStateType from 'redux/storeStateType';
 import ActionButton from 'components/ActionButton/ActionButton';
+import LocationDialog from 'components/Content/Locations/LocationDialog/LocationDialog';
 import CategoryDialog from 'components/Content/Categories/CategoryDialog/CategoryDialog';
 
 import useStyles from './AppToolbarStyles';
@@ -22,13 +24,17 @@ const AppToolbar: React.FC<Props> = (props: Props): JSX.Element => {
     const [mode, setMode] = useState<FormMode>(FormMode.VIEW);
 
     const selectedCategory = useSelector<StoreStateType, string>(state => state.selectedCategory);
-    const selectedLocation = useSelector<StoreStateType, string>(state => state.selectedLocation);
+    const selectedLocation = useSelector<StoreStateType, Location>(state => state.selectedLocation);
 
     const {
         openCategoryDialog,
         handleOpenCategoryDialog,
         handleCloseCategoryDialog,
         handleDeleteCategory,
+        openLocationDialog,
+        handleOpenLocationDialog,
+        handleCloseLocationDialog,
+        handleDeleteLocation
     } = useAppToolbar();
 
     return (
@@ -38,7 +44,6 @@ const AppToolbar: React.FC<Props> = (props: Props): JSX.Element => {
                     container 
                     spacing={2} 
                     direction='row'
-                    xs={12} 
                     alignItems='center' 
                     justify='space-between'
                 >
@@ -50,26 +55,26 @@ const AppToolbar: React.FC<Props> = (props: Props): JSX.Element => {
                     </Grid>
                     { currentPage === '/locations' ?
                         <Grid item container alignItems='center' xs={8} justify='flex-end' spacing={1}>
-                        { selectedLocation === '' ?
+                        { selectedLocation.name === '' ?
                             <ActionButton 
                                 mode={() => setMode(FormMode.CREATE)}
-                                action={() => handleOpenCategoryDialog()}
+                                action={() => handleOpenLocationDialog()}
                                 text={'Add New Location'}    
                             />  
                             :
                             <>
                                 <ActionButton 
                                     mode={() => setMode(FormMode.VIEW)}
-                                    action={() => handleOpenCategoryDialog()}
+                                    action={() => handleOpenLocationDialog()}
                                     text={'View'}    
                                 />
                                 <ActionButton 
                                     mode={() => setMode(FormMode.EDIT)}
-                                    action={() => handleOpenCategoryDialog()}
+                                    action={() => handleOpenLocationDialog()}
                                     text={'Edit'}    
                                 />
                                 <ActionButton 
-                                    action={() => handleDeleteCategory(selectedCategory)}
+                                    action={() => handleDeleteLocation(selectedLocation)}
                                     text={'Delete'}    
                                 />
                             </>
@@ -111,6 +116,13 @@ const AppToolbar: React.FC<Props> = (props: Props): JSX.Element => {
                 mode={mode}
                 handleCloseCategoryDialog={handleCloseCategoryDialog}
             />
+
+            <LocationDialog
+                open={openLocationDialog}
+                mode={mode}
+                handleCloseLocationDialog={handleCloseLocationDialog}
+            />  
+                
         </AppBar>
     );
 };
