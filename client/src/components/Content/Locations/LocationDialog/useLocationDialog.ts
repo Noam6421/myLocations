@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 
 import Location from 'models/Location';
 import StoreStateType from 'redux/storeStateType';
-import { createLocation, editLocation } from 'redux/Locations/locationsActionCreators';
 import { setSelectedLocation } from 'redux/SelectedLocation/selectedLocationActionCreators';
 
 const useLocationDialog = (props: Props) :  useAppToolbarOutcome => {
@@ -11,7 +10,7 @@ const useLocationDialog = (props: Props) :  useAppToolbarOutcome => {
     const { handleCloseLocationDialog } = props;
 
     const locations = useSelector<StoreStateType, Location[]>(state => state.locations);
-    const selectedLocation = useSelector<StoreStateType, string>(state => state.selectedLocation);
+    const selectedLocation = useSelector<StoreStateType, Location>(state => state.selectedLocation);
 
     const [locationName, setLocationName] = useState<string>('');
     const [error, setError] = useState<boolean>(false);
@@ -21,7 +20,7 @@ const useLocationDialog = (props: Props) :  useAppToolbarOutcome => {
     };
 
     useEffect(() => {
-        setLocationName(selectedLocation)
+        setLocationName(selectedLocation.name)
     }, [selectedLocation]);
 
     useEffect(() => {
@@ -33,23 +32,24 @@ const useLocationDialog = (props: Props) :  useAppToolbarOutcome => {
         }
     }, [locationName]);
     
-    const handleAddLocation = () => {
+    const handleAddLocation = (selectedLocation: Location) => {
         if (error) {
             return;
         }
+        console.log(selectedLocation)
         //createLocation({name: locationName});
         handleCloseLocationDialog();
         setLocationName('');
         setError(false);
     };
 
-    const handleEditLocation = () => {
+    const handleEditLocation = (selectedLocation: Location) => {
         if (error) {
             return;
         }
         //editLocation({name: selectedLocation}, locationName);
         handleCloseLocationDialog();
-        setSelectedLocation(locationName);
+        setSelectedLocation(selectedLocation);
         setLocationName('');
         setError(false);
     };
@@ -66,8 +66,8 @@ const useLocationDialog = (props: Props) :  useAppToolbarOutcome => {
 export interface useAppToolbarOutcome {
     locationName: string;
     setLocationName: React.Dispatch<React.SetStateAction<string>>;
-    handleAddLocation: () => void;
-    handleEditLocation: () => void;
+    handleAddLocation: (selectedLocation: Location) => void;
+    handleEditLocation: (selectedLocation: Location) => void;
     error: boolean;
 };
 
