@@ -5,4 +5,6 @@ interface Location {
     category: string
 };
 
+export const initalSelectedLocation = {name: '', address: '', cordinates: [0, 0], category: ''};
+
 export default Location;
