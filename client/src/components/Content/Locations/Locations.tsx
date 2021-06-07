@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, Typography, Card } from '@material-ui/core';
 
-import Location, { initalSelectedLocation } from 'models/Location';
 import StoreStateType from 'redux/storeStateType';
+import Location, { initalSelectedLocation } from 'models/Location';
 import { setSelectedLocation } from 'redux/SelectedLocation/selectedLocationActionCreators';
 
 import useStyles from './LocationsStyles';
