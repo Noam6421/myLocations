@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         boxShadow: '0 8px 40px -12px rgba(0,0,0,0.3)',
     },
     locationUnSelectedCard:{
-        backgroundColor: theme.palette.primary.light,
+        backgroundColor: theme.palette.primary.dark,
     },
     locationCardSelected: {
         boxShadow: '0 16px 70px -12.125px rgba(0,0,0,0.3)',
