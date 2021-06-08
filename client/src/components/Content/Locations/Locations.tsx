@@ -55,10 +55,11 @@ const Locations: React.FC<Props> = (): JSX.Element => {
                 </Grid>
                 {viewOptions.groupBy ?
                     Object.keys(locationsGroupedByCategory).map((key) => 
-                    <Grid item container xs={12} direction='column' spacing={1}>
-                        <Typography variant='h6'>{key}</Typography>
+                    <Grid item container xs={3}>
+                        <Typography variant='h6' className={classes.locationTitle}>{key} </Typography>
+                        <Grid item container xs={12} direction='column' spacing={1}>
                            {locationsGroupedByCategory[key].map((locationItem: Location) =>
-                            <Grid item xs={3} key={locationItem.name}>
+                            <Grid item xs={12} key={locationItem.name}>
                                 <Card 
                                     onClick={() => setSelectedLocation(selectedLocation.name === locationItem.name ? initalSelectedLocation : locationItem)} 
                                     className={
@@ -70,7 +71,8 @@ const Locations: React.FC<Props> = (): JSX.Element => {
                                     {locationItem.name}
                                 </Card>
                             </Grid>
-                        )} 
+                            )} 
+                        </Grid>
                     </Grid>       
                     )
                 : viewLocations.map((location) => {
