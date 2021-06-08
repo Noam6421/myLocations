@@ -8,8 +8,15 @@ import { initalSelectedLocation } from 'models/Location';
 
 import reducers from './reducers';
 import StoreStateType from './storeStateType';
+import { initalViewOptions } from 'models/ViewOptions';
 
-const initialState = {categories: [], locations: [], selectedCategory: '', selectedLocation: initalSelectedLocation};
+const initialState = {
+    categories: [], 
+    locations: [], 
+    selectedCategory: '', 
+    selectedLocation: initalSelectedLocation, 
+    viewOptions: initalViewOptions
+};
 
 const saveToLocalStorage = (state: StoreStateType & PersistPartial) => {
     try {
