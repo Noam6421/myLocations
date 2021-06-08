@@ -1,7 +1,7 @@
 enum LocationFieldsNames {
     NAME = 'Name: ',
     ADDRESS = 'Address: ',
-    CORDINATES = 'Cordinates: ',
+    COORDINATES = 'Coordinates: ',
     CATEGORY = 'Category: '
 };
 

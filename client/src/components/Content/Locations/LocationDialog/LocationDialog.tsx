@@ -125,21 +125,21 @@ const LocationDialog: React.FC<Props> = (props: Props): JSX.Element => {
                             </Grid>
                         </Grid>
                         {(error && !viewMode) && <Typography>{ERROR_MESSAGE}</Typography>}
-                        <Typography className={classes.subTitle}>{LocationFieldsNames.CORDINATES}</Typography>
+                        <Typography className={classes.subTitle}>{LocationFieldsNames.COORDINATES}</Typography>
                         { viewMode ?
                             <LocationMap
-                                latitude={currentLocation.cordinates?.latitude}
-                                longitude={currentLocation.cordinates?.longitude}
+                                latitude={currentLocation.coordinates?.latitude}
+                                longitude={currentLocation.coordinates?.longitude}
                             />
                         :
                             <div className={classes.locationMap}>
                              <GoogleMap
                                  bootstrapURLKeys={{key: process.env.REACT_APP_API_KEY as string}}
-                                 center={{ lat: currentLocation.cordinates.latitude, lng: currentLocation.cordinates.longitude }}
+                                 center={{ lat: currentLocation.coordinates.latitude, lng: currentLocation.coordinates.longitude }}
                                  zoom={9}
-                                 onClick={(e) => setCurrentLocation({...currentLocation, cordinates: {latitude: e.lat, longitude: e.lng}})}
+                                 onClick={(e) => setCurrentLocation({...currentLocation, coordinates: {latitude: e.lat, longitude: e.lng}})}
                              >
-                                 <MarkerComponent lat={currentLocation.cordinates.latitude} lng={currentLocation.cordinates.longitude}/>
+                                 <MarkerComponent lat={currentLocation.coordinates.latitude} lng={currentLocation.coordinates.longitude}/>
                              </GoogleMap>
                             </div>
                         }

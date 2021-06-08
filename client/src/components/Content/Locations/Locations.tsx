@@ -47,10 +47,11 @@ const Locations: React.FC<Props> = (): JSX.Element => {
                         </Typography>
                     }
                 </Grid>
-
-                <Grid item xs={12}>
-                    <ViewOptionsBar />
-                </Grid>
+                {locations.length > 0 &&
+                    <Grid item xs={12}>
+                        <ViewOptionsBar />
+                    </Grid>
+                }
                 {viewOptions.groupBy ?
                     Object.keys(locationsGroupedByCategory).map((key) => 
                     <Grid item container xs={3}>
