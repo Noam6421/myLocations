@@ -31,7 +31,10 @@ const ViewOptionsBar = () => {
                     className={classes.viewOptionButton}
                     onClick={() => {viewOptions.sort === '' ? setSort('alphabetically') : setSort('')}}    
                 >
-                    Sort alphabetically
+                    {viewOptions.sort === ''
+                        ? 'Sort Alphabetically'
+                        : 'Unsort Alphabetically'
+                    }
                 </Button>
             </Grid>
 
@@ -41,7 +44,10 @@ const ViewOptionsBar = () => {
                     className={classes.viewOptionButton}
                     onClick={() => {setGroupBy(!viewOptions.groupBy)}}
                 >
-                    Group By Category
+                    {viewOptions.groupBy === false
+                        ? 'Group By Categort'
+                        : 'unGroup By Category'
+                    }
                 </Button>
             </Grid>
 

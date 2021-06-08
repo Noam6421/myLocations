@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, Typography, Card } from '@material-ui/core';
 
+import ViewOptions from 'models/ViewOptions';
 import StoreStateType from 'redux/storeStateType';
 import Location, { initalSelectedLocation } from 'models/Location';
 import { setSelectedLocation } from 'redux/SelectedLocation/selectedLocationActionCreators';
@@ -15,6 +16,15 @@ const Locations: React.FC<Props> = (): JSX.Element => {
 
     const locations = useSelector<StoreStateType, Location[]>(state => state.locations);
     const selectedLocation = useSelector<StoreStateType, Location>(state => state.selectedLocation);
+    const viewOptions = useSelector<StoreStateType, ViewOptions>(state => state.viewOptions);
+
+    const filteredLocations = locations.filter((location) => {
+        return viewOptions.filter === 'All Categories' ? true : location.category === viewOptions.filter;
+    });
+
+    const viewLocations = viewOptions.sort === 'alphabetically' 
+        ? filteredLocations.sort((a,b) => a.name.localeCompare(b.name))
+        : filteredLocations;
 
     return (
         <>
@@ -39,7 +49,7 @@ const Locations: React.FC<Props> = (): JSX.Element => {
                     <ViewOptionsBar />
                 </Grid>
                 
-                { locations.map((location) => {
+                { viewLocations.map((location) => {
                     return (
                         <Grid item xs={3} key={location.name}>
                             <Card 
