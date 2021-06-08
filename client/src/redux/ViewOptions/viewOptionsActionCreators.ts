@@ -8,7 +8,7 @@ export const setSort = (sort: string): void => {
     })
 };
 
-export const setGroupBy = (groupBy: string): void => {
+export const setGroupBy = (groupBy: boolean): void => {
     store.dispatch({
         type: actionTypes.SET_GROUP_BY,
         payload: groupBy

@@ -1,9 +1,9 @@
 interface ViewOptions {
     sort: string;
-    groupBy: string;
+    groupBy: boolean;
     filter: string
 };
 
-export const initalViewOptions = {sort: '', groupBy: '', filter: ''};
+export const initalViewOptions = {sort: '', groupBy: false, filter: ''};
 
 export default ViewOptions;

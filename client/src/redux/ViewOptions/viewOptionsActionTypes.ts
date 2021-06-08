@@ -10,7 +10,7 @@ interface SetSort {
 
 interface SetGroupBy {
     type: typeof SET_GROUP_BY,
-    payload: string
+    payload: boolean
 };
 
 interface SetFilter {
