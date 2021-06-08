@@ -46,10 +46,6 @@ const theme = createMuiTheme({
     },
     overrides: {
         MuiOutlinedInput: {
-            root: {
-                borderRadius: 24,
-                fontWeight: 400
-            },
             inputMarginDense: {
                 paddingTop: 6.5,
                 paddingBottom: 6.5

@@ -36,7 +36,7 @@ const LocationDialog: React.FC<Props> = (props: Props): JSX.Element => {
     const createMode = mode === FormMode.CREATE;
     const editMode = mode === FormMode.EDIT;
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         editMode ? handleEditLocation() : handleAddLocation();
     };

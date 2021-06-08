@@ -1,12 +1,15 @@
+import _ from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, Typography, Card } from '@material-ui/core';
 
+import ViewOptions from 'models/ViewOptions';
 import StoreStateType from 'redux/storeStateType';
 import Location, { initalSelectedLocation } from 'models/Location';
 import { setSelectedLocation } from 'redux/SelectedLocation/selectedLocationActionCreators';
 
 import useStyles from './LocationsStyles';
+import ViewOptionsBar from './ViewOptions/ViewOptionsBar';
 
 const Locations: React.FC<Props> = (): JSX.Element => {
     
@@ -14,7 +17,20 @@ const Locations: React.FC<Props> = (): JSX.Element => {
 
     const locations = useSelector<StoreStateType, Location[]>(state => state.locations);
     const selectedLocation = useSelector<StoreStateType, Location>(state => state.selectedLocation);
+    const viewOptions = useSelector<StoreStateType, ViewOptions>(state => state.viewOptions);
 
+    
+    const filteredLocations = locations.filter((location) => {
+        return viewOptions.filter === 'All Categories' ? true : location.category === viewOptions.filter;
+    });
+    
+    const viewLocations = viewOptions.sort === 'alphabetically' 
+    ? filteredLocations.sort((a,b) => a.name.localeCompare(b.name))
+    : filteredLocations;
+    
+    const locationsGroupedByCategory = _.groupBy(viewLocations, 'category'.toString())
+
+        console.log(locationsGroupedByCategory)
     return (
         <>
             <Grid 
@@ -33,7 +49,33 @@ const Locations: React.FC<Props> = (): JSX.Element => {
                         </Typography>
                     }
                 </Grid>
-                { locations.map((location) => {
+
+                <Grid item xs={12}>
+                    <ViewOptionsBar />
+                </Grid>
+                {viewOptions.groupBy ?
+                    Object.keys(locationsGroupedByCategory).map((key) => 
+                    <Grid item container xs={3}>
+                        <Typography variant='h6' className={classes.locationTitle}>{key} </Typography>
+                        <Grid item container xs={12} direction='column' spacing={1}>
+                           {locationsGroupedByCategory[key].map((locationItem: Location) =>
+                            <Grid item xs={12} key={locationItem.name}>
+                                <Card 
+                                    onClick={() => setSelectedLocation(selectedLocation.name === locationItem.name ? initalSelectedLocation : locationItem)} 
+                                    className={
+                                        locationItem.name === selectedLocation.name
+                                        ? [classes.locationCard , classes.locationCardSelected].join(' ')
+                                        : [classes.locationCard , classes.locationUnSelectedCard].join(' ')
+                                    }
+                                >
+                                    {locationItem.name}
+                                </Card>
+                            </Grid>
+                            )} 
+                        </Grid>
+                    </Grid>       
+                    )
+                : viewLocations.map((location) => {
                     return (
                         <Grid item xs={3} key={location.name}>
                             <Card 

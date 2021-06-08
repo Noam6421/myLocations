@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 const useStyles = makeStyles((theme: Theme) => ({
     locationsSection: {
         padding: '20px 40px',
+        paddingBottom: '60px'
     },
     locationTitle: {
         paddingBottom: '10px',
