@@ -4,7 +4,9 @@ import { makeStyles } from '@material-ui/styles'
 const useStyles = makeStyles((theme: Theme) => ({
     appBar: {
         color: 'white',
-        backgroundColor: theme.palette.primary.light
+        backgroundColor: theme.palette.primary.light,
+        top: 0,
+        bottom: 'auto',
     },
     title: {
         color: 'white',

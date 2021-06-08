@@ -42,7 +42,6 @@ const AppToolbar: React.FC<Props> = (props: Props): JSX.Element => {
             <Toolbar>
                 <Grid
                     container 
-                    spacing={2} 
                     direction='row'
                     alignItems='center' 
                     justify='space-between'

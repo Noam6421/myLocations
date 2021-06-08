@@ -63,6 +63,11 @@ const theme = createMuiTheme({
                 fontSize: '16px',
             },
         },
+        MuiGrid: {
+            'spacing-xs-2': {
+                width: '100%'
+            },
+          },
     },
     props: {
         MuiTextField: {

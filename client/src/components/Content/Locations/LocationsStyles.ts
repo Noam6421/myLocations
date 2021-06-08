@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     locationCard: {
         color: 'white',
         maxWidth: 300,
-        margin: 'auto',
+        margin: '0',
         transition: '0.3s',
         padding: '10px',
         boxShadow: '0 8px 40px -12px rgba(0,0,0,0.3)',
