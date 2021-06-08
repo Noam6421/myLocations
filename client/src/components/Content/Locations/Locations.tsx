@@ -7,6 +7,7 @@ import Location, { initalSelectedLocation } from 'models/Location';
 import { setSelectedLocation } from 'redux/SelectedLocation/selectedLocationActionCreators';
 
 import useStyles from './LocationsStyles';
+import ViewOptionsBar from './ViewOptions/ViewOptionsBar';
 
 const Locations: React.FC<Props> = (): JSX.Element => {
     
@@ -33,6 +34,11 @@ const Locations: React.FC<Props> = (): JSX.Element => {
                         </Typography>
                     }
                 </Grid>
+
+                <Grid item xs={12}>
+                    <ViewOptionsBar />
+                </Grid>
+                
                 { locations.map((location) => {
                     return (
                         <Grid item xs={3} key={location.name}>
