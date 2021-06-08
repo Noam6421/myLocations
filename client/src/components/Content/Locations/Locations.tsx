@@ -19,18 +19,16 @@ const Locations: React.FC<Props> = (): JSX.Element => {
     const selectedLocation = useSelector<StoreStateType, Location>(state => state.selectedLocation);
     const viewOptions = useSelector<StoreStateType, ViewOptions>(state => state.viewOptions);
 
-    
     const filteredLocations = locations.filter((location) => {
         return viewOptions.filter === 'All Categories' ? true : location.category === viewOptions.filter;
     });
     
     const viewLocations = viewOptions.sort === 'alphabetically' 
-    ? filteredLocations.sort((a,b) => a.name.localeCompare(b.name))
-    : filteredLocations;
+        ? filteredLocations.sort((a,b) => a.name.localeCompare(b.name))
+        : filteredLocations;
     
     const locationsGroupedByCategory = _.groupBy(viewLocations, 'category'.toString())
 
-        console.log(locationsGroupedByCategory)
     return (
         <>
             <Grid 
