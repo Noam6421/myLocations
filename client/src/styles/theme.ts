@@ -6,7 +6,7 @@ const theme = createMuiTheme({
     palette: {
         primary: {
             light: 'rgb(134,166,223)',
-            main: 'rgb(44, 151, 185)',
+            main: 'rgb(78, 112, 122)',
             dark: 'rgb(51,80,124)',
             contrastText: '#fff',
         },
@@ -46,10 +46,6 @@ const theme = createMuiTheme({
     },
     overrides: {
         MuiOutlinedInput: {
-            root: {
-                borderRadius: 24,
-                fontWeight: 400
-            },
             inputMarginDense: {
                 paddingTop: 6.5,
                 paddingBottom: 6.5
@@ -67,6 +63,11 @@ const theme = createMuiTheme({
                 fontSize: '16px',
             },
         },
+        MuiGrid: {
+            'spacing-xs-2': {
+                width: '100%'
+            },
+          },
     },
     props: {
         MuiTextField: {
