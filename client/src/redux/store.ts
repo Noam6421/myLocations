@@ -15,7 +15,8 @@ const initialState = {
     locations: [], 
     selectedCategory: '', 
     selectedLocation: initalSelectedLocation, 
-    viewOptions: initalViewOptions
+    viewOptions: initalViewOptions,
+    _persist: {version: 0, rehydrated: true} 
 };
 
 const saveToLocalStorage = (state: StoreStateType & PersistPartial) => {

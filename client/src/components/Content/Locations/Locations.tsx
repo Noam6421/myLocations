@@ -20,7 +20,9 @@ const Locations: React.FC<Props> = (): JSX.Element => {
     const viewOptions = useSelector<StoreStateType, ViewOptions>(state => state.viewOptions);
 
     const filteredLocations = locations.filter((location) => {
-        return viewOptions.filter === 'All Categories' ? true : location.category === viewOptions.filter;
+        return (viewOptions.filter === 'All Categories' || viewOptions.filter === '') 
+            ? true 
+            : location.category === viewOptions.filter;
     });
     
     const viewLocations = viewOptions.sort === 'alphabetically' 

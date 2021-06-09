@@ -135,11 +135,11 @@ const LocationDialog: React.FC<Props> = (props: Props): JSX.Element => {
                             <div className={classes.locationMap}>
                              <GoogleMap
                                  bootstrapURLKeys={{key: process.env.REACT_APP_API_KEY as string}}
-                                 center={{ lat: currentLocation.coordinates.latitude, lng: currentLocation.coordinates.longitude }}
+                                 center={{ lat: currentLocation.coordinates?.latitude, lng: currentLocation.coordinates?.longitude }}
                                  zoom={9}
                                  onClick={(e) => setCurrentLocation({...currentLocation, coordinates: {latitude: e.lat, longitude: e.lng}})}
                              >
-                                 <MarkerComponent lat={currentLocation.coordinates.latitude} lng={currentLocation.coordinates.longitude}/>
+                                 <MarkerComponent lat={currentLocation.coordinates?.latitude} lng={currentLocation.coordinates?.longitude}/>
                              </GoogleMap>
                             </div>
                         }

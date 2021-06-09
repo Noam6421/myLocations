@@ -54,7 +54,7 @@ const AppToolbar: React.FC<Props> = (props: Props): JSX.Element => {
                     </Grid>
                     { currentPage === '/locations' ?
                         <Grid item container alignItems='center' xs={8} justify='flex-end' spacing={1}>
-                        { selectedLocation.name === '' ?
+                        { selectedLocation.name === '' || selectedLocation.name === undefined ?
                             <ActionButton 
                                 mode={() => setMode(FormMode.CREATE)}
                                 action={() => handleOpenLocationDialog()}
